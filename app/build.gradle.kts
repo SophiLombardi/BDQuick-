@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.room.compiler)
+    implementation(libs.androidx.room3.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -58,7 +60,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     val room_version = "3.0.3"
-    //val room_version = "2.8.0"
+    //val room_version = "2.6.1"
     implementation("android.x.room3:room3-runtime:$room_version")
     ksp("androidx.room3:room3-compiler:$room_version")
 }
