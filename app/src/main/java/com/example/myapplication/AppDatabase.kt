@@ -5,13 +5,13 @@ import androidx.room3.Database
 import androidx.room3.Room
 import androidx.room3.RoomDatabase
 
-@Database(entities = [filmes::class], version = 1)
+@Database(entities = [Filmes::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     // public static AppDatabase INSTANCE = null
 
 
-    abstract fun filmesDAO(): filmesDAO
+    abstract fun filmesDAO(): FilmesDAO
 
     companion object {
 

@@ -5,12 +5,12 @@ import androidx.room3.Insert
 import androidx.room3.Query
 
 @Dao
-interface filmesDAO {
+interface FilmesDAO {
 
         @Insert
-        fun inserir(Filme: filmes) {
+        fun inserir(Filme: Filmes) {
         }
     @Query("SELECT * FROM filmes")
-    fun buscarFilmes() : List<filmes>
+    fun buscarFilmes() : List<Filmes>
 
 }
