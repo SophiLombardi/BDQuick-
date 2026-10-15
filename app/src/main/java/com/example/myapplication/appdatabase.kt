@@ -1,41 +1,40 @@
 package com.example.myapplication
-import androidx.room.processor.Context
+
+import android.content.Context
 import androidx.room3.Database
 import androidx.room3.Room
 import androidx.room3.RoomDatabase
 
 @Database(entities = [filmes::class], version = 1)
-abstract class appdatabase : RoomDatabase(){
+abstract class AppDatabase : RoomDatabase() {
+
+    // public static AppDatabase INSTANCE = null
 
 
-    abstract fun filmesDAO(): FilmesDAO
+    abstract fun filmesDAO(): filmesDAO
 
     companion object {
 
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(context: Context) : AppDatabase {
+        fun getDatabase(context: Context): AppDatabase{
 
             val tempInstance = INSTANCE
 
-            if(INSTANCE != null){
-                return INSTANCE // se o banco ja existe, devolve ele
-            } else {
-                //se nao, cria o banco
+            if(tempInstance != null){
+                return tempInstance
+            }else{
 
-                synchronized(lock = this){
-
+                synchronized(this){
                     val instance = Room.databaseBuilder(
                         context.applicationContext,
-                        klass = AppDatabase::class.java,
-                        name = "app_database"
+                        AppDatabase::class.java,
+                        "app_database"
                     ).build()
-
                     INSTANCE = instance
                     return instance
                 }
-
 
             }
 

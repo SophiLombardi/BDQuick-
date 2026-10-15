@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "com.example.myapplication"
     compileSdk {
-        version = release(36) {
+        version = release(35) {
             minorApiLevel = 1
         }
     }
@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId = "com.example.myapplication"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -59,8 +59,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    val room_version = "3.0.3"
-    //val room_version = "2.6.1"
-    implementation("android.x.room3:room3-runtime:$room_version")
+    //val room_version = "3.0.3"
+    val room_version = "2.6.1"
+    implementation("android.x.room:room-runtime:$room_version")
+    implementation("android.x.roo3:room-ktx:${room_version}")
     ksp("androidx.room3:room3-compiler:$room_version")
 }
