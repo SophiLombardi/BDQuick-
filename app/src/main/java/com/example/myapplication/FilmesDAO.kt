@@ -1,8 +1,11 @@
 package com.example.myapplication
 
-import androidx.room3.Dao
-import androidx.room3.Insert
-import androidx.room3.Query
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
+
 
 @Dao
 interface FilmesDAO {
@@ -12,5 +15,11 @@ interface FilmesDAO {
         }
     @Query("SELECT * FROM filmes")
     fun buscarFilmes() : List<Filmes>
+
+    @Update
+    fun atualizarFilmes(filmes: Filmes)
+
+    @Delete
+    fun removerFilme(filmes: Filmes)
 
 }

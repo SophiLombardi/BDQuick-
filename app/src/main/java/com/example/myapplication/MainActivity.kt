@@ -73,6 +73,7 @@ fun TelaPrinipal() {
     }
 }
 
+
 suspend fun inserirFilme(nome: String, desc: String, filmesDao: FilmesDAO){
     try {
         filmesDao.inserir(Filmes(0, nome, desc))
