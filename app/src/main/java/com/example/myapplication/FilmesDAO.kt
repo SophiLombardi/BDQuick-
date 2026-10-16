@@ -17,9 +17,9 @@ interface FilmesDAO {
     fun buscarFilmes() : List<Filmes>
 
     @Update
-    fun atualizarFilmes(filmes: Filmes)
+    fun atualizarFilmes(filme: Filmes)
 
     @Delete
-    fun removerFilme(filmes: Filmes)
+    fun removerFilme(filme: Filmes)
 
 }
