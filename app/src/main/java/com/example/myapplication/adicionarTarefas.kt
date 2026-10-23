@@ -119,7 +119,7 @@ fun AddTaskScreen(
             )
         },
         bottomBar = {
-            AddTaskBottomBar(selectedIndex = 2, onSelect = onNavigate)
+            CustomBottomNavigation(currentRoute = "tasks")
         },
     ) { padding ->
         Column(
@@ -301,27 +301,6 @@ private fun AddTaskStepButton(symbol: String, description: String, onClick: () -
         contentAlignment = Alignment.Center,
     ) {
         Text(symbol, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = AddTaskCoinOrange)
-    }
-}
-
-@Composable
-private fun AddTaskBottomBar(selectedIndex: Int, onSelect: (Int) -> Unit) {
-    NavigationBar(containerColor = AddTaskCream, tonalElevation = 0.dp) {
-        addTaskNavItems.forEachIndexed { index, item ->
-            NavigationBarItem(
-                selected = index == selectedIndex,
-                onClick = { onSelect(index) },
-                icon = { Icon(item.icon, contentDescription = item.label) },
-                label = { Text(item.label, fontSize = 10.sp, fontWeight = FontWeight.SemiBold) },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = AddTaskTeal,
-                    selectedTextColor = AddTaskTeal,
-                    unselectedIconColor = AddTaskTextGray,
-                    unselectedTextColor = AddTaskTextGray,
-                    indicatorColor = Color.Transparent,
-                ),
-            )
-        }
     }
 }
 
