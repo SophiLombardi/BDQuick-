@@ -81,7 +81,7 @@ fun TarefasDoDiaScreen() {
 
     Scaffold(
         containerColor = CorFundo,
-        bottomBar = { TarefasBottomNavBar() }
+        bottomBar = { CustomBottomNavigation(currentRoute = "tasks") }
     ) { padding ->
         LazyColumn(
             modifier = Modifier
@@ -282,101 +282,6 @@ private fun CheckboxCircular(marcado: Boolean) {
         }
     }
 }
-
-@Composable
-private fun TarefasBottomNavBar() {
-
-    val context = LocalContext.current
-
-    NavigationBar(containerColor = CorCard) {
-        NavigationBarItem(
-            selected = false,
-            onClick = {
-                val intent = Intent(context, PetHome::class.java)
-                context.startActivity(intent)
-            },
-            icon = {
-                Icon(
-                    imageVector = Icons.Outlined.Home,
-                    contentDescription = "Início",
-                    tint = GrayText
-                )
-            },
-            label = { Text(text = "Início", fontSize = 11.sp) },
-            colors = itemColors()
-        )
-        NavigationBarItem(
-            selected = false,
-            onClick = {
-                val intent = Intent(context, Calendario::class.java)
-                context.startActivity(intent)
-            },
-            icon = {
-                Icon(
-                    imageVector = Icons.Outlined.DateRange,
-                    contentDescription = "Calendário",
-                    tint = GrayText
-                )
-            },
-            label = { Text(text = "Calendário", fontSize = 11.sp) },
-            colors = itemColors()
-        )
-        NavigationBarItem(
-            selected = true,
-            onClick = { },
-            icon = {
-                Icon(
-                    imageVector = Icons.Outlined.List,
-                    contentDescription = "Tarefas",
-                    tint = PrimaryGreen
-                )
-            },
-            label = { Text(text = "Tarefas", fontSize = 11.sp) },
-            colors = itemColors()
-        )
-        NavigationBarItem(
-            selected = false,
-            onClick = {
-                val intent = Intent(context, Loja::class.java)
-                context.startActivity(intent)
-            },
-            icon = {
-                Icon(
-                    imageVector = Icons.Outlined.ShoppingCart,
-                    contentDescription = "Loja",
-                    tint = GrayText
-                )
-            },
-            label = { Text(text = "Loja", fontSize = 11.sp) },
-            colors = itemColors()
-        )
-        NavigationBarItem(
-            selected = false,
-            onClick = {
-                val intent = Intent(context, Perfil::class.java)
-                context.startActivity(intent)
-            },
-            icon = {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Perfil",
-                    tint = GrayText
-                )
-            },
-            label = { Text(text = "Perfil", fontSize = 11.sp) },
-            colors = itemColors()
-        )
-    }
-}
-
-@Composable
-private fun itemColors() = NavigationBarItemDefaults.colors(
-    selectedIconColor = CorTextoPrincipal,
-    selectedTextColor = CorTextoPrincipal,
-    unselectedIconColor = CorTextoSecundario,
-    unselectedTextColor = CorTextoSecundario,
-    indicatorColor = Color(0xFFFFF3D6)
-)
 
 @Preview(showBackground = true)
 @Composable
