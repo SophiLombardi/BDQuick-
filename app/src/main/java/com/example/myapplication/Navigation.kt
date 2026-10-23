@@ -1,9 +1,6 @@
 package com.example.myapplication
 
 import android.content.Intent
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.DateRange
@@ -11,12 +8,11 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -64,56 +60,39 @@ val bottomNavEntries = listOf(
     )
 )
 
+/**
+ * Barra de navegação inferior (visual do projeto quick: Material3 NavigationBar).
+ * A navegação continua sendo feita por Activities, como no BDQuick.
+ */
 @Composable
 fun CustomBottomNavigation(currentRoute: String = "home") {
     val context = LocalContext.current
 
-    Surface(
-        color = Color.White,
-        shadowElevation = 8.dp
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 10.dp),
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+    Surface(color = Color.White, shadowElevation = 8.dp) {
+        NavigationBar(containerColor = Color.White) {
             bottomNavEntries.forEach { entry ->
-                val isSelected = entry.route == currentRoute
-                val color = if (isSelected) Color(0xFF12C2A3) else Color(0xFF8C9BA5)
+                NavigationBarItem(
+                    selected = currentRoute == entry.route,
+                    onClick = {
+                        if (entry.route == currentRoute) return@NavigationBarItem
 
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(12.dp))
-                        .clickable {
-                            if (entry.route == currentRoute) return@clickable
-
-                            entry.targetActivity?.let { target ->
-                                val intent = Intent(context, target).apply {
-                                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                                            Intent.FLAG_ACTIVITY_SINGLE_TOP
-                                }
-                                context.startActivity(intent)
+                        entry.targetActivity?.let { target ->
+                            val intent = Intent(context, target).apply {
+                                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                                        Intent.FLAG_ACTIVITY_SINGLE_TOP
                             }
+                            context.startActivity(intent)
                         }
-                        .padding(horizontal = 12.dp, vertical = 6.dp)
-                ) {
-                    Icon(
-                        imageVector = entry.icon,
-                        contentDescription = entry.label,
-                        tint = color,
-                        modifier = Modifier.size(22.dp)
-                    )
-                    Text(
-                        text = entry.label,
-                        color = color,
-                        fontSize = 10.sp,
-                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-                    )
-                }
+                    },
+                    icon = { Icon(entry.icon, contentDescription = entry.label) },
+                    label = {
+                        Text(
+                            entry.label,
+                            fontSize = 10.sp,
+                            fontWeight = if (currentRoute == entry.route) FontWeight.Bold else FontWeight.Normal
+                        )
+                    }
+                )
             }
         }
     }
