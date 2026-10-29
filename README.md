@@ -25,21 +25,24 @@ as tarefas serão obtidas moedas que servirão para personalização do pet e se
 a matéria de Desenvolvimento de Aplicativos Móveis no intuito de ser inovador no que se propoẽ
 
 ## 🛸 Documentação do processo e das decisões
-1- Como estava o projeto no Trabalho 2, e o que mudou para chegar até aqui?
-Foi adicionado um CRUD em nosso projeto e também o banco de dados 100% funcional em nosso código, também adicionamos um banco de dados
+1 - Como estava o projeto no Trabalho 2 e o que mudou?
+No Trabalho 2, o Quick! guardava os dados só em memória, com mutableStateListOf, então tudo se perdia ao fechar o app. Neste trabalho adicionamos o Room como banco de dados local e implementamos o CRUD completo. Agora tarefas e itens da loja são salvos e lidos do banco, e os dados persistem entre as execuções.
 
-2 - Quais Entity, DAO e Database foram criados — e por que escolheram esses campos para cada Entity?
+2 - Quais Entity, DAO e Database foram criados, e por que esses campos?
 
+Entities: Task (tarefas da lista) e ItemLoja (itens da loja de moedas).
+Campos: Task com id, título, descrição, data, concluída e moedas de recompensa; ItemLoja com id, nome, preço e imagem. Escolhemos esses campos porque são os dados que as telas de adicionar tarefa, tarefas do dia e loja precisam exibir e salvar.
+DAOs: TaskDao e ItemLojaDao fazem as operações de inserir, atualizar, remover e consultar no banco.
+AppDatabase: é a classe que configura o Room, registra as entidades e fornece o acesso aos DAOs. 
 
-3 - Como decidiram estruturar as queries do DAO (quais métodos além dos 4 básicos, se houver)?
+3 - Como estruturaram as queries do DAO?
+Cada entidade tem seu próprio DAO: TaskDao para as tarefas e ItemLojaDao para a loja. Ambos têm as 4 operações do CRUD (@Insert, @Update, @Delete e uma @Query que lista tudo Todos os métodos são suspend, para não bloquear a thread principal.
 
+4 - Qual foi a dificuldade em migrar de mutableStateListOf para Room?
+A migração foi tranquila, sem grandes problemas. A principal dificuldade foi adaptar as telas, que antes liam uma lista em memória e agora precisam buscar os dados do banco, também a implementação do CRUD foi problemática pois o celular do android studio não deixava a gente testar direito
 
-4 - Qual foi a dificuldade em migrar de mutableStateListOf para Room? O que quebrou no caminho
-e como resolveram?
-
-
-5 - Algum integrante do trio teve dificuldade em algum ponto? Como resolveram?
-Tivemos diversas dificuldade, sendo uma delas o tempo novamente e as diversas versoes do android studio onde muitas vezes davam conflito. 
+5 - Alguém do trio teve dificuldade? Como resolveram?
+Sim, tivemos várias. A principal foi o tempo, de novo, porque o prazo apertou. Outra foram as diferentes versões do Android Studio entre os integrantes, que causavam conflitos de build e de dependências.
 
 ## ✨ Funcionalidades
 
